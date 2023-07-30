@@ -9,7 +9,7 @@ import java.nio.channels.SelectionKey;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -30,5 +30,9 @@ public class Categoria implements Serializable {
     @OneToMany(mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
 
-
+    public Categoria(Integer id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
 }
