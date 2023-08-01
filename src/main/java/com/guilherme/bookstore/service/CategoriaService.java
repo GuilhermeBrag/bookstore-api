@@ -2,6 +2,7 @@ package com.guilherme.bookstore.service;
 
 import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.repositories.CategoriaRepository;
+import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,8 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
     public Categoria findById(Integer id) {
         Optional<Categoria> obj = categoriaRepository.findById(id);
-         return obj.orElse(null);
+         return obj.orElseThrow(() -> new ObjectNotFoundException(
+                 "Objeto não encontrado! Id:" + id + ", Tipo: " + Categoria.class.getName()));
     }
 
 
