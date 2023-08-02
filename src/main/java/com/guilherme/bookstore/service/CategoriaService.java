@@ -5,6 +5,7 @@ import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.repositories.CategoriaRepository;
 import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,14 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findById(id);
-        categoriaRepository.deleteById(id);
+
+        try {
+            categoriaRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e) {
+            throw new
+                    com.guilherme.bookstore.service.exceptions.DataIntegrityViolationException(
+                            "Categoria não pode ser deletada! Possui livros associados");
+        }
     }
 
 }
