@@ -5,6 +5,7 @@ import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.repositories.CategoriaRepository;
 import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,4 +38,10 @@ public class CategoriaService {
         obj.setDescricao(objDTO.getDescricao());
         return categoriaRepository.save(obj);
     }
+
+    public void delete(Integer id) {
+        findById(id);
+        categoriaRepository.deleteById(id);
+    }
+
 }
