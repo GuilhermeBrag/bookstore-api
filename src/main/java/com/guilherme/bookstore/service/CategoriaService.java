@@ -1,5 +1,6 @@
 package com.guilherme.bookstore.service;
 
+import com.guilherme.bookstore.Dtos.CategoriaDTO;
 import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.repositories.CategoriaRepository;
 import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
@@ -30,5 +31,10 @@ public class CategoriaService {
     }
 
 
-
+    public Categoria update(Integer id, CategoriaDTO objDTO) {
+        Categoria obj = findById(id);
+        obj.setNome(objDTO.getNome());
+        obj.setDescricao(objDTO.getDescricao());
+        return categoriaRepository.save(obj);
+    }
 }

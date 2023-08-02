@@ -3,6 +3,7 @@ package com.guilherme.bookstore.resources;
 import com.guilherme.bookstore.Dtos.CategoriaDTO;
 import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.service.CategoriaService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,14 @@ public class CategoriaResource {
 
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoriaDTO> update(@PathVariable Integer id, @RequestBody CategoriaDTO objDTO) {
+        Categoria newObj = categoriaService.update(id, objDTO);
+        return ResponseEntity.ok().body(new CategoriaDTO(newObj));
+    }
+
+
 
 }
 
