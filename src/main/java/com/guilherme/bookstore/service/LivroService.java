@@ -1,5 +1,6 @@
 package com.guilherme.bookstore.service;
 
+import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.domain.Livro;
 import com.guilherme.bookstore.repositories.LivroRepository;
 import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
@@ -41,5 +42,10 @@ public class LivroService {
         newObj.setTexto(obj.getTexto());
     }
 
-
+    public Livro create(Integer id_cat,Livro obj) {
+        obj.setId(null);
+        Categoria cat = categoriaService.findById(id_cat);
+        obj.setCategoria(cat);
+        return livroRepository.save(obj);
+    }
 }
