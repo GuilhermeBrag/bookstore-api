@@ -6,6 +6,7 @@ import com.guilherme.bookstore.repositories.LivroRepository;
 import com.guilherme.bookstore.service.LivroService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -58,6 +59,12 @@ public class LivroResource {
                 .buildAndExpand(newObj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        livroService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
