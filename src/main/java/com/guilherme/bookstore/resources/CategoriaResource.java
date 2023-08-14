@@ -37,7 +37,7 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(listDTO);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Categoria> create(@Valid @RequestBody Categoria obj) {
         obj = categoriaService.create(obj);
         URI uri = ServletUriComponentsBuilder
